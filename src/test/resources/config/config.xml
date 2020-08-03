@@ -2,6 +2,55 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <bean id="king" class="entities.library.Author">
+        <property name="firstName" value="Steven"/>
+        <property name="lastName" value="King"/>
+        <property name="age" value="72"/>
+    </bean>
+
+    <bean id="brown" class="entities.library.Author">
+        <constructor-arg index="0" value="Dan"/>
+        <constructor-arg index="1" value="Brown"/>
+        <constructor-arg index="2" value="56"/>
+    </bean>
+
+    <bean id="it" class="entities.library.Book">
+        <property name="author" ref="king"/>
+        <property name="name" value="It"/>
+        <property name="price" value="666"/>
+    </bean>
+
+    <bean id="inferno" class="entities.library.Book">
+        <property name="author" ref="brown"/>
+        <property name="name" value="Inferno"/>
+        <property name="price" value="666"/>
+    </bean>
+
+    <bean id="origin" class="entities.library.Book">
+        <property name="author" ref="brown"/>
+        <property name="name" value="Origin"/>
+        <property name="price" value="1000"/>
+    </bean>
+
+    <bean class="entities.library.Library">
+        <constructor-arg index="0" value="Alexander"/>
+        <property name="authors">
+            <list>
+                <ref bean="king"/>
+                <ref bean="brown"/>
+            </list>
+        </property>
+        <property name="bookMap">
+            <map>
+                <entry key="1" value-ref="it"/>
+                <entry key="2" value-ref="origin"/>
+                <entry key="3" value-ref="inferno"/>
+            </map>
+        </property>
+    </bean>
 </beans>
